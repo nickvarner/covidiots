@@ -1,21 +1,20 @@
 const express = require('express');
-const cors = require('cors');
 const connectDB = require('./config/db');
 
 const app = express();
 // connect database
 connectDB();
 
-// var corsOptions = {
-// 	origin : 'http://localhost:8081'
-// };
-
-// app.use(cors(corsOptions));
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // To parse the incoming requests with JSON payloads
 
 app.get('/', (req, res) => res.send('api running'));
+
+// Define Routes
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/posts', require('./routes/api/posts'));
 
 const PORT = process.env.PORT || 8080;
 
