@@ -1,0 +1,32 @@
+{
+  "name": "covidiots",
+  "version": "1.0.0",
+  "description": "crud app with restful routes and user auth for people to submit news stories about covidiots",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickvarner/covidiots.git"
+  },
+  "author": "nick varner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickvarner/covidiots/issues"
+  },
+  "homepage": "https://github.com/nickvarner/covidiots#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^6.2.0",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.11.1",
+    "gravatar": "^1.8.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.12",
+    "nodemon": "^2.0.7"
+  }
+}
