@@ -7,7 +7,7 @@ const ProfileSchema = mongoose.Schema({
 		ref  : 'user'
 	},
 	age             : {
-		type : String
+		type : Number
 	},
 	gender          : {
 		type : String

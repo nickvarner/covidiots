@@ -27,7 +27,7 @@ router.get('/me', auth, async (req, res) => {
 // @access   Private
 
 router.post('/', auth, async (req, res) => {
-	const { age, gender, politicalParty, bio, youtube, twitter, facebook, instagram } = req.body;
+	const { age, gender, politicalParty, bio, personalityTags, youtube, twitter, facebook, instagram } = req.body;
 	// build profile object
 	const profileFields = {};
 	profileFields.user = req.user.id;
@@ -46,16 +46,11 @@ router.post('/', auth, async (req, res) => {
 	if (instagram) profileFields.social.instagram = instagram;
 
 	try {
-		let profile = await Profile.findOne({ user: req.user.id });
-		if (profile) {
-			// update profile
-			profile = await Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileFields }, { new: true });
-			return res.json(profile);
-		}
-
-		// create profile
-		profile = new Profile(profile);
-		await Profile.save();
+		let profile = await Profile.findByIdAndUpdate(
+			profileFields.user,
+			{ $set: profileFields },
+			{ new: true, upsert: true }
+		);
 		res.json(profile);
 	} catch (err) {
 		res.status(500).send('server error');
