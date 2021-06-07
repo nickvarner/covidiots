@@ -65,10 +65,13 @@ router.post(
 					id : user.id
 				}
 			};
-			jwt.sign(payload, dbConfig.jwtsecret);
+			jwt.sign(payload, dbConfig.jwtToken, { expiresIn: '5 days' }, (err, token) => {
+				if (err) throw err;
+				res.json({ token });
+			});
 		} catch (err) {
 			console.error(err.message);
-			res.status(500).send('server error');
+			res.status(500).send('Server error');
 		}
 	}
 );
