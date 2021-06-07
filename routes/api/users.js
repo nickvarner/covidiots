@@ -29,7 +29,7 @@ router.post(
 		try {
 			let user = await User.findOne({ username });
 			let userEmail = await User.findOne({ email });
-			// let id = uuidv4();
+
 			// see if the user exists
 			if (user) {
 				// if the user exists, send an error
