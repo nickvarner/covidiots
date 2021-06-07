@@ -5,8 +5,10 @@ const app = express();
 // connect database
 connectDB();
 
+//initialize middleware
+app.use(express.json({ extended: true })); // To parse the incoming requests with JSON payloads
+
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); // To parse the incoming requests with JSON payloads
 
 app.get('/', (req, res) => res.send('api running'));
 
