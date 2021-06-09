@@ -75,4 +75,100 @@ router.post('/', auth, async (req, res) => {
 //   }
 // })
 
+// @route    GET api/profile
+// @desc     get all profiles
+// @access   Public
+
+router.get('/', async (req, res) => {
+	try {
+		const profiles = await Profile.find().populate('user', [ 'username', 'avatar' ]);
+		res.json(profiles);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send('server error');
+	}
+});
+
+// @route    GET api/user/:user_id
+// @desc     get profile by userid
+// @access   Public
+
+router.get('/user/:user_id', async (req, res) => {
+	try {
+		const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', [ 'username', 'avatar' ]);
+		if (!profile) return res.status(400).json({ msg: 'profile not found' });
+		res.json(profile);
+	} catch (err) {
+		console.error(err.message);
+		if (err.kind === 'ObjectId') return res.status(400).json({ msg: 'profile not found' });
+		res.status(500).send('server error');
+	}
+});
+
+// @route    DELETE api/profile
+// @desc     delete profile, user and submissions
+// @access   Private
+
+router.delete('/', auth, async (req, res) => {
+	const id = req.user.id;
+	try {
+		// @todo - remove users submissions
+
+		// remove profile
+		await Profile.findByIdAndDelete(id);
+		// remove user
+		await User.findByIdAndDelete(id);
+		res.json({ msg: 'user deleted' });
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send('server error');
+	}
+});
+
+// @route    PUT api/profile
+// @desc     adding profile 'experience' **not included in my app, but an option for adding experience with dates for other app ideas**
+// @access   Private
+
+// need validation, because some of the fields will be required, so we'll need express validator
+// and we add validation to the middleware, changing just 'auth' to be an array with auth and the validation
+// router.put('/experience', [auth, [
+// 	check('title', 'title is required').not().isEmpty(),
+// 	check('company', 'company is required').not().isEmpty(),
+// 	check('from', 'from date is required').not().isEmpty()
+// ]], async (req, res) => {
+// 	const errors = validationResult(req);
+// 	if(!errors.isEmpty()) {
+// 		return res.status(400).json({ errors: errors.array() });
+// 	}
+// 	// destructure given data
+// const {
+// 	title,
+// 	company,
+// 	location,
+// 	from,
+// 	to,
+// 	current,
+// 	description } = req.body;
+
+// 	const newExp ={
+// 		title,
+// 		company,
+// 		location,
+// 		from,
+// 		to,
+// 		current,
+// 		description
+// 	};
+
+// 	try {
+// 		const profile = await Profile.findById(req.user.id);
+// 		profile.experience.unshift(newExp);
+// 		await profile.save();
+// 		res.json(profile);
+// 	} catch (err) {
+// 		console.error(err.message).res.status(500).send('server error')
+// 	}
+//  }
+// )
+
 module.exports = router;
