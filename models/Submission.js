@@ -14,18 +14,18 @@ const SubmissionSchema = new Schema({
 		type : String
 	},
 	url         : {
-		type     : URL,
-		required : True
+		type     : String,
+		required : true
 	},
 	title       : {
 		type     : String,
-		required : True
+		required : true
 	},
 	description : {
 		type : String
 	},
 	imgUrl      : {
-		type : URL
+		type : String
 	},
 	author      : {
 		type : String
@@ -40,7 +40,7 @@ const SubmissionSchema = new Schema({
 		type    : Date,
 		default : Date.now
 	},
-	votes       : [
+	likes       : [
 		{
 			user : {
 				type : Schema.Types.ObjectId,
@@ -56,7 +56,7 @@ const SubmissionSchema = new Schema({
 			},
 			text     : {
 				type     : String,
-				required : True
+				required : true
 			},
 			userName : {
 				type : String
