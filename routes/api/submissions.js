@@ -133,4 +133,60 @@ router.put('/unlike/:id', auth, async (req, res) => {
 	}
 });
 
+// @route    POST api/submissions/comment/:id
+// @desc     comment on a submission
+// @access   Private
+
+router.post('/comment/:id', auth, body('text', 'comment is required').notEmpty(), async (req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() });
+	}
+	try {
+		const user = await User.findById(req.user.id).select('-password');
+		const submission = await Submission.findById(req.params.id);
+		const newComment = {
+			user     : req.user.id,
+			text     : req.body.text,
+			userName : user.username,
+			avatar   : user.avatar
+		};
+		submission.comments.unshift(newComment);
+		await submission.save();
+		res.json(submission.comments);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send('server error');
+	}
+});
+
+// @route    DELETE api/submissions/comment/:id/:comment_id
+// @desc     delete comment on a submission
+// @access   Private
+
+router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
+	try {
+		// get the submission
+		const submission = await Submission.findById(req.params.id);
+		// pull out the comment from the post
+		// this will give us the comment if it exists or false if it doesnt
+		const comment = submission.comments.find((comment) => comment.id === req.params.comment_id);
+		if (!comment) {
+			return res.status(404).json({ msg: 'comment with that id does not exist' });
+		}
+		// check ownership of comment with the user
+		if (comment.user.toString() !== req.user.id) {
+			return res.status(401).json({ msg: 'user not authorized' });
+		}
+		// get remove index
+		const removeIdx = submission.comments.map((comment) => comment.user.toString()).indexOf(req.params.comment_id);
+		submission.comments.splice(removeIdx, 1);
+		await submission.save();
+		res.json(submission.comments);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send('server error');
+	}
+});
+
 module.exports = router;
