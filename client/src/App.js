@@ -1,17 +1,27 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import { BrowserRouter, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import Navigation from './components/layout/Navigation';
 import Landing from '../src/components/layout/Landing';
-import Container from 'react-bootstrap/Container';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
 const App = () => {
 	return (
-		<Container>
-			<div className='App'>
+		<div className='App'>
+			<BrowserRouter>
 				<Navigation />
-				<Landing />
-			</div>
-		</Container>
+				<Route exact path='/' component={Landing} />
+				<Container>
+					<Switch>
+						<Route exact path='/register' component={Register} />
+						<Route exact path='/login' component={Login} />
+					</Switch>
+				</Container>
+			</BrowserRouter>
+		</div>
 	);
 };
 
