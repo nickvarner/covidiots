@@ -6,8 +6,10 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../hooks/UserContext';
 
 const Navigation = () => {
+	const { user, setUser } = React.useContext(UserContext);
 	return (
 		<div className='Navbar'>
 			<Navbar bg='dark' expand='lg' variant='dark'>
@@ -36,10 +38,17 @@ const Navigation = () => {
 							</Link>
 						</NavDropdown>
 						<Link to='/login'>
-							<Navbar.Text>login or register</Navbar.Text>
+							<Navbar.Text>login</Navbar.Text>
 						</Link>
+						<Button onClick={() => setUser('nick')} label='change value'>
+							change value
+						</Button>
+						{user}
 					</Nav>
 					<Form inline>
+						<Link to='/register'>
+							<Navbar.Text>register</Navbar.Text>
+						</Link>
 						<FormControl type='text' placeholder='Search' className='mr-sm-2' />
 						<Button variant='outline-success'>Search</Button>
 					</Form>

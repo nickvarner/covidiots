@@ -3,64 +3,37 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setAlert } from '../../actions/alert';
 
 const Register = () => {
 	const [ formData, setFormData ] = React.useState({
-		username       : '',
-		email          : '',
-		password       : '',
-		password2      : '',
-		age            : 18,
-		politicalParty : '',
-		youtube        : '',
-		facebook       : '',
-		twitter        : '',
-		instagram      : ''
+		username  : '',
+		email     : '',
+		password  : '',
+		password2 : ''
 	});
 
-	const {
-		username,
-		email,
-		password,
-		password2
-		// age,
-		// politicalParty,
-		// youtube,
-		// facebook,
-		// twitter,
-		// instagram
-	} = formData;
+	const { username, email, password, password2 } = formData;
+
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
+
 	const passwordCheck = (pass1, pass2) => {
 		if (pass1 === pass2) {
 			return true;
 		}
 	};
+
+	const dispatch = useDispatch();
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!passwordCheck(password, password2)) {
-			console.log(formData);
+			dispatch(setAlert('passwords do not match', 'danger'));
 		} else {
-			const newUser = {
-				username,
-				email,
-				password
-			};
-			try {
-				const config = {
-					headers : {
-						'Content-Type' : 'Application/json'
-					}
-				};
-				const body = JSON.stringify(newUser);
-				// sending to /api/users cause we set up a proxy
-				const res = await axios.post('/api/users', body, config);
-				console.log(res.data);
-			} catch (err) {
-				console.error(err.response.data);
-			}
+			console.log('send request here to db');
 		}
 	};
 
