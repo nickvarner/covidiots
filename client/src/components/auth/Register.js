@@ -1,10 +1,11 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
+import { useSelector } from 'react-redux';
 
 const Register = () => {
 	const [ formData, setFormData ] = React.useState({
@@ -15,6 +16,7 @@ const Register = () => {
 	});
 
 	const { username, email, password, password2 } = formData;
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,6 +38,10 @@ const Register = () => {
 			dispatch(register({ username, email, password }));
 		}
 	};
+
+	if (isAuthenticated) {
+		return <Redirect to='/dashboard' />;
+	}
 
 	return (
 		<div className='Register'>

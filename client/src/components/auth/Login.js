@@ -1,10 +1,15 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../../actions/auth';
+import { useSelector } from 'react-redux';
 
 const Login = () => {
+	const dispatch = useDispatch();
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
 	const [ formData, setFormData ] = React.useState({
 		email    : '',
 		password : ''
@@ -18,8 +23,11 @@ const Login = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log('success');
+		dispatch(login(email, password));
 	};
+	if (isAuthenticated) {
+		return <Redirect to='/dashboard' />;
+	}
 
 	return (
 		<div className='Login'>

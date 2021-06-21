@@ -1,4 +1,4 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL } from '../actions/types';
+import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL } from '../actions/types';
 
 const initialState = {
 	// jwt webtoken, stored in localstorage
@@ -12,7 +12,15 @@ export default function (state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
+		case USER_LOADED:
+			return {
+				...state,
+				isAuthenticated : true,
+				loading         : false,
+				user            : payload
+			};
 		case REGISTER_SUCCESS:
+		case LOGIN_SUCCESS:
 			// if its a success when they login, we get that jwt token back
 			localStorage.setItem('token', payload.token);
 			return {
@@ -22,6 +30,8 @@ export default function (state = initialState, action) {
 				loading         : false
 			};
 		case REGISTER_FAIL:
+		case AUTH_ERROR:
+		case LOGIN_FAIL:
 			// we want to remove the jwt token if it fails
 			localStorage.removeItem('token');
 			return {

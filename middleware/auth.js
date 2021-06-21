@@ -1,20 +1,14 @@
 const jwt = require('jsonwebtoken');
 const dbConfig = require('../config/db.config');
 
-module.exports = async function (req, res, next) {
-	// Get the token from the header
+module.exports = function (req, res, next) {
+	// Get token from header
 	const token = req.header('x-auth-token');
-	const decoded = jwt.verify(token, dbConfig.jwtToken);
-	const user = await User.findById(decoded.user.id);
-	if (!user) {
-		return res.status(401).json({ msg: 'Token is not valid' });
-	}
-	// check if no token
-	if (!token) {
-		return res.status(401).json({ msg: 'no token, authorization denied' });
-	}
 
-	// verify token
+	// Check if not token
+	if (!token) {
+		return res.status(401).json({ msg: 'No token, authorization denied' });
+	}
 	try {
 		const decoded = jwt.verify(token, dbConfig.jwtToken);
 		req.user = decoded.user;
