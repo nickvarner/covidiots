@@ -1,10 +1,10 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 
 const Register = () => {
 	const [ formData, setFormData ] = React.useState({
@@ -33,7 +33,7 @@ const Register = () => {
 		if (!passwordCheck(password, password2)) {
 			dispatch(setAlert('passwords do not match', 'danger'));
 		} else {
-			console.log('send request here to db');
+			dispatch(register({ username, email, password }));
 		}
 	};
 
@@ -50,7 +50,7 @@ const Register = () => {
 						name='username'
 						value={username}
 						onChange={(e) => handleChange(e)}
-						required
+						// required
 					/>
 				</Form.Group>
 				<Form.Group controlId='formGroupEmail'>
@@ -61,7 +61,7 @@ const Register = () => {
 						name='email'
 						value={email}
 						onChange={(e) => handleChange(e)}
-						required
+						// required
 					/>
 				</Form.Group>
 				<Form.Group controlId='formGroupPassword'>
@@ -72,7 +72,8 @@ const Register = () => {
 						name='password'
 						value={password}
 						onChange={(e) => handleChange(e)}
-						required
+						// minLength='6'
+						// required
 					/>
 				</Form.Group>
 				<Form.Group controlId='formGroupPassword2'>
@@ -83,7 +84,8 @@ const Register = () => {
 						name='password2'
 						value={password2}
 						onChange={(e) => handleChange(e)}
-						required
+						// minLength='6'
+						// required
 					/>
 				</Form.Group>
 				{/* lets save this for the dashboard page */}
