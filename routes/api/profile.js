@@ -191,27 +191,4 @@ router.delete('/', auth, async (req, res) => {
 // 		console.error(err.message)
 // 	}
 
-// })
-// @route    GET api/profile/github/:username
-// @desc     get user repos from github
-// @access   Public
-// @note		 **!! NOT tested !!**
-
-router.get('/github/:username', async (req, res) => {
-	try {
-		// construct options object
-		const uri = encodeURI(`https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`);
-		const headers = {
-			'user-agent'  : 'node.js',
-			Authorization : `token ${config.gitHubAccessToken}`
-		};
-
-		const gitHubResponse = await axios.get(uri, { headers });
-		return res.json(gitHubResponse.data);
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).send('server error');
-	}
-});
-
 module.exports = router;

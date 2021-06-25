@@ -43,7 +43,9 @@ const Navigation = () => {
 								)}
 								<NavDropdown.Divider />
 								<Link to='/'>
-									<NavDropdown.Item href='#action/3.4'>my dashboard</NavDropdown.Item>
+									<NavDropdown.Item>
+										<Link to='/dashboard'>my dashboard</Link>
+									</NavDropdown.Item>
 								</Link>
 							</NavDropdown>
 							{
