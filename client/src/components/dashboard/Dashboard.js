@@ -5,14 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
 import { setAlert } from '../../actions/alert';
 import Loading from '../layout/Loading';
+import DashboardActions from './DashboardActions';
 
 const Dashboard = () => {
 	const auth = useSelector((state) => state.auth);
 	const isLoading = useSelector((state) => state.profile.loading);
-	const profile = useSelector((state) => state.profile);
-	console.log(profile);
-	console.log(profile.profile);
-	console.log(auth);
+	const profile = useSelector((state) => state.profile.profile);
 	const dispatch = useDispatch();
 	React.useEffect(() => {
 		dispatch(getCurrentProfile());
@@ -27,7 +25,9 @@ const Dashboard = () => {
 					<i className='fas fa-user' /> welcome {auth && auth.user.username}
 				</h4>
 				{
-					profile !== null ? <Fragment /> :
+					profile !== null ? <Fragment>
+						<DashboardActions />
+					</Fragment> :
 					<Fragment>
 						<h5>You have not yet created a profile, please add some information</h5>
 						<Link to='/create-profile'>

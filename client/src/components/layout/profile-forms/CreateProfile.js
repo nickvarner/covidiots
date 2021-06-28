@@ -2,26 +2,22 @@ import React from 'react';
 import { Fragment } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentProfile } from '../../../actions/profile';
-import CreateProfile from '../../../styles/CreateProfile.css';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createProfile } from '../../../actions/profile';
+
+import '../../../styles/profile.css';
 import Loading from '../Loading';
 
-function ProfileForm () {
-	const auth = useSelector((state) => state.auth);
-	const isLoading = useSelector((state) => state.profile.loading);
-	const { profile } = useSelector((state) => state.profile);
+function CreateProfile () {
+	const history = useHistory();
 	const dispatch = useDispatch();
-	React.useEffect(
-		() => {
-			dispatch(getCurrentProfile());
-		},
-		[ profile ]
-	);
+
 	const [ formData, setFormData ] = React.useState({
 		age            : '',
 		politicalParty : '',
 		bio            : '',
+		gender         : '',
 		youtube        : '',
 		twitter        : '',
 		facebook       : '',
@@ -30,7 +26,7 @@ function ProfileForm () {
 
 	const [ displaySocialInputs, toggleSocialInputs ] = React.useState(false);
 
-	const { age, bio, politicalParty, youtube, twitter, facebook, instagram } = formData;
+	const { age, bio, gender, politicalParty, youtube, twitter, facebook, instagram } = formData;
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,11 +34,13 @@ function ProfileForm () {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		dispatch(createProfile(formData, history));
 	};
+
 	return (
 		<div className='Dashboard'>
 			<h1>dashboard</h1>
-			<h3>update your profile</h3>
+			<h3>create your profile</h3>
 			<Form onSubmit={(e) => handleSubmit(e)}>
 				<Form.Group controlId='formAge'>
 					<Form.Label>Age</Form.Label>
@@ -56,7 +54,6 @@ function ProfileForm () {
 				</Form.Group>
 				<Form.Group controlId='bio'>
 					<Form.Label>bio</Form.Label>
-					<small className='form-text'>tell us a bit about yourself</small>
 					<Form.Control
 						as='textarea'
 						name='bio'
@@ -64,6 +61,14 @@ function ProfileForm () {
 						value={bio}
 						onChange={(e) => handleChange(e)}
 					/>
+				</Form.Group>
+				<Form.Group controlId='formGender' name='gender' value={gender} onChange={(e) => handleChange(e)}>
+					<Form.Control as='select' aria-label='select a political party' onChange={(e) => handleChange(e)}>
+						<option>What gender are you?</option>
+						<option value='male'>male</option>
+						<option value='female'>female</option>
+						<option value='nonConforming'>non conforming</option>
+					</Form.Control>
 				</Form.Group>
 				<Form.Group
 					controlId='formPoliticalParty'
@@ -138,4 +143,4 @@ function ProfileForm () {
 	);
 }
 
-export default ProfileForm;
+export default CreateProfile;

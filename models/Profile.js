@@ -2,26 +2,23 @@ const mongoose = require('mongoose');
 
 const ProfileSchema = mongoose.Schema({
 	// create a reference to the user model
-	user            : {
+	user           : {
 		type : mongoose.Schema.Types.ObjectId,
 		ref  : 'user'
 	},
-	age             : {
+	age            : {
 		type : Number
 	},
-	gender          : {
+	gender         : {
 		type : String
 	},
-	politicalParty  : {
+	politicalParty : {
 		type : String
 	},
-	bio             : {
+	bio            : {
 		type : String
 	},
-	personalityTags : {
-		type : [ String ]
-	},
-	social          : {
+	social         : {
 		youtube   : {
 			type : String
 		},
@@ -35,7 +32,7 @@ const ProfileSchema = mongoose.Schema({
 			type : String
 		}
 	},
-	date            : {
+	date           : {
 		type    : Date,
 		default : Date.now
 	}
