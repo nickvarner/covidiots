@@ -1,0 +1,11 @@
+.social,
+.fab {
+	display: flex;
+	justify-content: space-evenly;
+	padding: .5rem;
+	flex-wrap: wrap;
+}
+
+.submit {
+	padding-top: 20px;
+}
