@@ -4,13 +4,12 @@ import Button from 'react-bootstrap/Button';
 
 function DashboardActions () {
 	return (
-		<div className='dashboardActions'>
+		<div className='dashboardActions mt-3'>
 			<Link to='/edit-profile'>
-				<Button variant='outline-primary'>
+				<Button variant='outline-primary mr-2'>
 					<i className='fas fa-user-circle' /> edit profile
 				</Button>
 			</Link>
-			<Button variant='danger'>delete profile</Button>
 		</div>
 	);
 }

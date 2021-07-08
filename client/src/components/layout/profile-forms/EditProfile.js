@@ -2,6 +2,7 @@ import React from 'react';
 import { Fragment } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProfile, getCurrentProfile } from '../../../actions/profile';
@@ -65,7 +66,7 @@ function EditProfile () {
 						profile.social.instagram
 			});
 		},
-		[ loading ]
+		[ loading, profile, dispatch ]
 	);
 
 	const { age, bio, gender, politicalParty, youtube, twitter, facebook, instagram } = formData;
@@ -185,9 +186,12 @@ function EditProfile () {
 						</Fragment>
 					)}
 					<div className='submit'>
-						<Button variant='primary' type='submit'>
-							Submit
+						<Button variant='primary' type='submit' className='mr-1'>
+							submit
 						</Button>
+						<Link to='/dashboard'>
+							<Button variant='secondary'>go back</Button>
+						</Link>
 					</div>
 				</Form>
 			</div>

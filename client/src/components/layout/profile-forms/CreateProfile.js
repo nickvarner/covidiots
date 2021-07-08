@@ -1,13 +1,12 @@
 import React from 'react';
-import { Fragment } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 import { useDispatch } from 'react-redux';
 import { createProfile } from '../../../actions/profile';
 
 import '../../../styles/profile.css';
-import Loading from '../Loading';
 
 function CreateProfile () {
 	const history = useHistory();
@@ -88,7 +87,7 @@ function CreateProfile () {
 					optional
 				</Button>
 				{displaySocialInputs && (
-					<Fragment>
+					<Container>
 						<div className='social media inputs'>
 							<Form.Group controlId='formYoutube'>
 								<i className='fab fa-youtube fa-2x' />
@@ -131,12 +130,15 @@ function CreateProfile () {
 								/>
 							</Form.Group>
 						</div>
-					</Fragment>
+					</Container>
 				)}
 				<div className='submit'>
-					<Button variant='primary' type='submit'>
+					<Button variant='primary' type='submit' className='mr-1'>
 						Submit
 					</Button>
+					<Link to='/dashboard'>
+						<Button variant='secondary'>go back</Button>
+					</Link>
 				</div>
 			</Form>
 		</div>

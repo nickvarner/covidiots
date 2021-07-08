@@ -1,7 +1,7 @@
 import React from 'react';
 // use the useSelector hook whenever you want the state from the redux store
 import { useSelector } from 'react-redux';
-
+import { Alert as AlertComponent } from 'react-bootstrap';
 const Alert = () => {
 	const alerts = useSelector((state) => state.alert);
 
@@ -12,9 +12,9 @@ const Alert = () => {
 		alerts.length > 0 &&
 		// then you can map the alerts
 		alerts.map((alert) => (
-			<div key={alert.id} className={`alert alert-${alert.alertType}`}>
+			<AlertComponent key={alert.id} variant={alert.alertType}>
 				{alert.msg}
-			</div>
+			</AlertComponent>
 		));
 
 	return alertMessage;
