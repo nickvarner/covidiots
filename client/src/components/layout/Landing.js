@@ -2,6 +2,8 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Landing = () => {
 	const { isAuthenticated } = useSelector((state) => state.auth);
@@ -12,9 +14,19 @@ const Landing = () => {
 	}, []);
 	return (
 		<Container>
-			<div className='Landing'>
-				<div className='h1'>landing page</div>
-			</div>
+			<Row>
+				<Col>
+					<div className='Landing'>
+						<h1>landing page col 1</h1>
+					</div>
+				</Col>
+				<Col>
+					<h2>col 2</h2>
+				</Col>
+			</Row>
+			<Row>
+				<Col>row 2 col 1</Col>
+			</Row>
 		</Container>
 	);
 };

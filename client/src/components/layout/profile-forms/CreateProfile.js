@@ -1,6 +1,9 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Fade from 'react-bootstrap/Fade';
 import { useHistory, Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import { useDispatch } from 'react-redux';
@@ -23,7 +26,7 @@ function CreateProfile () {
 		instagram      : ''
 	});
 
-	const [ displaySocialInputs, toggleSocialInputs ] = React.useState(false);
+	const [ open, setOpen ] = React.useState(false);
 
 	const { age, bio, gender, politicalParty, youtube, twitter, facebook, instagram } = formData;
 
@@ -83,55 +86,70 @@ function CreateProfile () {
 					</Form.Control>
 				</Form.Group>
 				<h3>social platforms</h3>
-				<Button onClick={() => toggleSocialInputs(!displaySocialInputs)} variant='secondary'>
+				<Button
+					onClick={() => setOpen(!open)}
+					variant='secondary'
+					aria-controls='social-inputs'
+					aria-expanded='open'
+					size='sm'>
 					optional
 				</Button>
-				{displaySocialInputs && (
-					<Container>
-						<div className='social media inputs'>
-							<Form.Group controlId='formYoutube'>
-								<i className='fab fa-youtube fa-2x' />
-								<Form.Control
-									type='input'
-									placeholder='YouTube Username'
-									name='youtube'
-									value={youtube}
-									onChange={(e) => handleChange(e)}
-								/>
-							</Form.Group>
-							<Form.Group controlId='formTwitter'>
-								<i className='fab fa-twitter fa-2x' />
-								<Form.Control
-									type='input'
-									placeholder='Twitter Username'
-									name='twitter'
-									value={twitter}
-									onChange={(e) => handleChange(e)}
-								/>
-							</Form.Group>
-							<Form.Group controlId='formFacebook'>
-								<i className='fab fa-facebook fa-2x' />
-								<Form.Control
-									type='input'
-									placeholder='Facebook Username'
-									name='facebook'
-									value={facebook}
-									onChange={(e) => handleChange(e)}
-								/>
-							</Form.Group>
-							<Form.Group controlId='formInstagram'>
-								<i className='fab fa-instagram fa-2x' />
-								<Form.Control
-									type='input'
-									placeholder='Instagram Username'
-									name='instagram'
-									value={instagram}
-									onChange={(e) => handleChange(e)}
-								/>
-							</Form.Group>
-						</div>
-					</Container>
-				)}
+				<Fade in={open}>
+					<div className='social-inputs'>
+						<Container>
+							<Row>
+								<Col>
+									<Form.Group controlId='formYoutube'>
+										<i className='fab fa-youtube fa-2x' />
+										<Form.Control
+											type='input'
+											placeholder='YouTube Username'
+											name='youtube'
+											value={youtube}
+											onChange={(e) => handleChange(e)}
+										/>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group controlId='formTwitter'>
+										<i className='fab fa-twitter fa-2x' />
+										<Form.Control
+											type='input'
+											placeholder='Twitter Username'
+											name='twitter'
+											value={twitter}
+											onChange={(e) => handleChange(e)}
+										/>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group controlId='formFacebook'>
+										<i className='fab fa-facebook fa-2x' />
+										<Form.Control
+											type='input'
+											placeholder='Facebook Username'
+											name='facebook'
+											value={facebook}
+											onChange={(e) => handleChange(e)}
+										/>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group controlId='formInstagram'>
+										<i className='fab fa-instagram fa-2x' />
+										<Form.Control
+											type='input'
+											placeholder='Instagram Username'
+											name='instagram'
+											value={instagram}
+											onChange={(e) => handleChange(e)}
+										/>
+									</Form.Group>
+								</Col>
+							</Row>
+						</Container>
+					</div>
+				</Fade>
 				<div className='submit'>
 					<Button variant='primary' type='submit' className='mr-1'>
 						Submit

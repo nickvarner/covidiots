@@ -1,12 +1,14 @@
 .social,
 .fab {
-	display: flex;
 	justify-content: space-evenly;
 	padding: .5rem;
 	flex-wrap: wrap;
 }
 
 .submit {
-	display: flex;
 	padding-top: 20px;
+}
+
+.edit-profile {
+	padding-top: 2rem;
 }

@@ -59,13 +59,13 @@ router.post('/', auth, async (req, res) => {
 	}
 });
 
-// @route    GET api/profile
+// @route    GET api/profiles
 // @desc     get all profiles
 // @access   Public
 
 router.get('/', async (req, res) => {
 	try {
-		const profiles = await Profile.find().populate('user', [ 'username', 'avatar' ]);
+		const profiles = await Profile.find().populate('user', [ 'username', 'avatar', 'politicalParty' ]);
 		res.json(profiles);
 	} catch (err) {
 		console.error(err.message);

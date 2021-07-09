@@ -42,11 +42,14 @@ const Navigation = () => {
 									<NavDropdown.Item onClick={() => dispatch(logout())}>logout</NavDropdown.Item>
 								)}
 								<NavDropdown.Divider />
-								<Link to='/'>
+								<NavDropdown.Item>
+									<Link to='/dashboard'>my dashboard</Link>
+								</NavDropdown.Item>
+								{isAuthenticated && (
 									<NavDropdown.Item>
-										<Link to='/dashboard'>my dashboard</Link>
+										<Link to='/profiles'>user profiles</Link>
 									</NavDropdown.Item>
-								</Link>
+								)}
 							</NavDropdown>
 							{
 								isAuthenticated ? <Nav.Link onClick={() => dispatch(logout())}>logout</Nav.Link> :
@@ -62,7 +65,9 @@ const Navigation = () => {
 					</Nav>
 					<Form inline>
 						<FormControl type='text' placeholder='Search' className='mr-sm-2' />
-						<Button variant='outline-success'>Search</Button>
+						<Button variant='outline-light' size='sm'>
+							Search
+						</Button>
 					</Form>
 				</Navbar.Collapse>
 			</Navbar>
