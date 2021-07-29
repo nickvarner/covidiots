@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAlert } from '../../actions/alert';
@@ -44,57 +45,58 @@ const Register = () => {
 
 	return (
 		<div className='Register'>
-			<h1>sign up</h1>
-			<h3>register a new account</h3>
-			<Form onSubmit={(e) => handleSubmit(e)}>
-				<Form.Group controlId='formUsername'>
-					<Form.Label>Display Name</Form.Label>
-					<Form.Control
-						type='input'
-						placeholder='enter a display name'
-						name='username'
-						value={username}
-						onChange={(e) => handleChange(e)}
-						// required
-					/>
-				</Form.Group>
-				<Form.Group controlId='formGroupEmail'>
-					<Form.Label>Email address</Form.Label>
-					<Form.Control
-						type='email'
-						placeholder='Enter email'
-						name='email'
-						value={email}
-						onChange={(e) => handleChange(e)}
-						// required
-					/>
-				</Form.Group>
-				<Form.Group controlId='formGroupPassword'>
-					<Form.Label>Password</Form.Label>
-					<Form.Control
-						type='password'
-						placeholder='Password'
-						name='password'
-						value={password}
-						onChange={(e) => handleChange(e)}
-						// minLength='6'
-						// required
-					/>
-				</Form.Group>
-				<Form.Group controlId='formGroupPassword2'>
-					<Form.Label>Password</Form.Label>
-					<Form.Control
-						type='password'
-						placeholder='Confirm Password'
-						name='password2'
-						value={password2}
-						onChange={(e) => handleChange(e)}
-						// minLength='6'
-						// required
-					/>
-				</Form.Group>
-				{/* lets save this for the dashboard page */}
-				{/* <Form.Group controlId='formAge'>
+			<Container>
+				<h1>sign up</h1>
+				<h3>register a new account</h3>
+				<Form onSubmit={(e) => handleSubmit(e)}>
+					<Form.Group controlId='formUsername'>
+						<Form.Label>Display Name</Form.Label>
+						<Form.Control
+							type='input'
+							placeholder='enter a display name'
+							name='username'
+							value={username}
+							onChange={(e) => handleChange(e)}
+							// required
+						/>
+					</Form.Group>
+					<Form.Group controlId='formGroupEmail'>
+						<Form.Label>Email address</Form.Label>
+						<Form.Control
+							type='email'
+							placeholder='Enter email'
+							name='email'
+							value={email}
+							onChange={(e) => handleChange(e)}
+							// required
+						/>
+					</Form.Group>
+					<Form.Group controlId='formGroupPassword'>
+						<Form.Label>Password</Form.Label>
+						<Form.Control
+							type='password'
+							placeholder='Password'
+							name='password'
+							value={password}
+							onChange={(e) => handleChange(e)}
+							// minLength='6'
+							// required
+						/>
+					</Form.Group>
+					<Form.Group controlId='formGroupPassword2'>
+						<Form.Label>Password</Form.Label>
+						<Form.Control
+							type='password'
+							placeholder='Confirm Password'
+							name='password2'
+							value={password2}
+							onChange={(e) => handleChange(e)}
+							// minLength='6'
+							// required
+						/>
+					</Form.Group>
+					{/* lets save this for the dashboard page */}
+					{/* <Form.Group controlId='formAge'>
 					<Form.Label>Age</Form.Label>
 					<Form.Control
 						type='input'
@@ -161,13 +163,14 @@ const Register = () => {
 				<Form.Group controlId='formBasicCheckbox'>
 					<Form.Check type='checkbox' label='Check me out' />
 				</Form.Group> */}
-				<Button variant='primary' type='submit'>
-					Submit
-				</Button>
-			</Form>
-			<div className='div'>
-				already have an account? <Link to='/login'>sign in</Link>
-			</div>
+					<Button variant='primary' type='submit'>
+						Submit
+					</Button>
+				</Form>
+				<div className='div'>
+					already have an account? <Link to='/login'>sign in</Link>
+				</div>
+			</Container>
 		</div>
 	);
 };

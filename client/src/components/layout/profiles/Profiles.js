@@ -16,31 +16,32 @@ const Profiles = () => {
 	}, []);
 	if (isLoading) {
 		return <Loading />;
-	} else {
-		return (
-			<Container>
-				<div>
-					<Row>
+	}
+	return (
+		<Container>
+			<div>
+				<Row>
+					<Col>
 						<h1 className='large text-primary'>user profiles</h1>
-					</Row>
-					<Row>
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						{' '}
 						<p className='lead' />
 						<i className='fab fa-connectdevelop' />connect with other users
-					</Row>
-					<Row fluid>
-						{
-							profiles.length > 0 ? profiles.map((profile) => (
-								<Col>
-									<ProfileItem key={profile._id} profile={profile} />
-								</Col>
-								// <div className='row'>{profile.gender}</div>
-							)) :
-							<h4>no profiles found</h4>}
-					</Row>
-				</div>
-			</Container>
-		);
-	}
+					</Col>
+				</Row>
+				<Row xs={1} md={2} className='g-4'>
+					{
+						profiles.length > 0 ? profiles.map((profile) => (
+							<ProfileItem key={profile._id} profile={profile} />
+						)) :
+						<h4>no profiles found</h4>}
+				</Row>
+			</div>
+		</Container>
+	);
 };
 
 export default Profiles;

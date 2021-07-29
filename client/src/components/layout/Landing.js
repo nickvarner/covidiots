@@ -9,23 +9,20 @@ const Landing = () => {
 	const { isAuthenticated } = useSelector((state) => state.auth);
 	const currentProfile = useSelector((state) => state.profile);
 	const dispatch = useDispatch();
-	React.useEffect(() => {
-		dispatch(getCurrentProfile());
-	}, []);
+	React.useEffect(
+		() => {
+			dispatch(getCurrentProfile());
+		},
+		[ dispatch ]
+	);
 	return (
 		<Container>
 			<Row>
 				<Col>
 					<div className='Landing'>
-						<h1>landing page col 1</h1>
+						<h1>landing</h1>
 					</div>
 				</Col>
-				<Col>
-					<h2>col 2</h2>
-				</Col>
-			</Row>
-			<Row>
-				<Col>row 2 col 1</Col>
 			</Row>
 		</Container>
 	);

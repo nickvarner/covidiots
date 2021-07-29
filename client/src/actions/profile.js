@@ -13,7 +13,6 @@ export const getCurrentProfile = () => async (dispatch) => {
 			type    : GET_PROFILE,
 			payload : res.data
 		});
-		console.log(res.data);
 	} catch (err) {
 		dispatch({
 			type    : PROFILE_ERROR,
@@ -42,7 +41,7 @@ export const getProfiles = () => async (dispatch) => {
 	}
 };
 
-// Get all users profile
+// Get a users profile
 // must use async dispatch when were dispatching stuff from the types, which is dispatched to find cases in their respective reducers
 export const getProfileById = (userId) => async (dispatch) => {
 	try {
@@ -51,7 +50,6 @@ export const getProfileById = (userId) => async (dispatch) => {
 			type    : GET_PROFILE,
 			payload : res.data
 		});
-		console.log(res.data);
 	} catch (err) {
 		dispatch({
 			type    : PROFILE_ERROR,

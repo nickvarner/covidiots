@@ -31,46 +31,43 @@ function EditProfile () {
 
 	const [ open, setOpen ] = React.useState(false);
 
-	React.useEffect(
-		() => {
-			dispatch(getCurrentProfile());
-			setFormData({
-				age            :
+	React.useEffect(() => {
+		dispatch(getCurrentProfile());
+		setFormData({
+			age            :
 
-						loading || !profile.age ? '' :
-						profile.age,
-				bio            :
+					loading || !profile.age ? '' :
+					profile.age,
+			bio            :
 
-						loading || !profile.bio ? '' :
-						profile.bio,
-				gender         :
+					loading || !profile.bio ? '' :
+					profile.bio,
+			gender         :
 
-						loading || !profile.gender ? '' :
-						profile.gender,
-				politicalParty :
+					loading || !profile.gender ? '' :
+					profile.gender,
+			politicalParty :
 
-						loading || !profile.politicalParty ? '' :
-						profile.politicalParty,
-				youtube        :
+					loading || !profile.politicalParty ? '' :
+					profile.politicalParty,
+			youtube        :
 
-						loading || !profile.social ? '' :
-						profile.social.youtube,
-				twitter        :
+					loading || !profile.social ? '' :
+					profile.social.youtube,
+			twitter        :
 
-						loading || !profile.social ? '' :
-						profile.social.twitter,
-				facebook       :
+					loading || !profile.social ? '' :
+					profile.social.twitter,
+			facebook       :
 
-						loading || !profile.social ? '' :
-						profile.social.facebook,
-				instagram      :
+					loading || !profile.social ? '' :
+					profile.social.facebook,
+			instagram      :
 
-						loading || !profile.social ? '' :
-						profile.social.instagram
-			});
-		},
-		[ loading, profile, dispatch ]
-	);
+					loading || !profile.social ? '' :
+					profile.social.instagram
+		});
+	}, []);
 
 	const { age, bio, gender, politicalParty, youtube, twitter, facebook, instagram } = formData;
 
@@ -85,138 +82,157 @@ function EditProfile () {
 
 	if (loading) {
 		return <Loading />;
-	} else {
-		return (
-			<div className='edit-profile'>
-				<Col>
-					<Row>
+	}
+	return (
+		<div className='edit-profile'>
+			<Container>
+				<Row>
+					<Col>
 						<h1>dashboard</h1>
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<h3>edit your profile</h3>
+					</Col>
+				</Row>
+				<Form onSubmit={(e) => handleSubmit(e)}>
+					<Row>
+						<Col>
+							<Form.Group controlId='formAge'>
+								<Form.Label>Age</Form.Label>
+								<Form.Control
+									type='input'
+									placeholder='how old are you?'
+									name='age'
+									value={age}
+									onChange={(e) => handleChange(e)}
+								/>
+							</Form.Group>
+						</Col>
 					</Row>
 					<Row>
-						<h3>edit your profile</h3>
+						<Col>
+							<Form.Group controlId='bio'>
+								<Form.Label>bio</Form.Label>
+								<Form.Control
+									as='textarea'
+									name='bio'
+									placeholder='tell us a bit about yourself'
+									value={bio}
+									onChange={(e) => handleChange(e)}
+								/>
+							</Form.Group>
+						</Col>
 					</Row>
-					<Form onSubmit={(e) => handleSubmit(e)}>
-						<Form.Group controlId='formAge'>
-							<Form.Label>Age</Form.Label>
-							<Form.Control
-								type='input'
-								placeholder='how old are you?'
-								name='age'
-								value={age}
-								onChange={(e) => handleChange(e)}
-							/>
-						</Form.Group>
-						<Form.Group controlId='bio'>
-							<Form.Label>bio</Form.Label>
-							<Form.Control
-								as='textarea'
-								name='bio'
-								placeholder='tell us a bit about yourself'
-								value={bio}
-								onChange={(e) => handleChange(e)}
-							/>
-						</Form.Group>
-						<Form.Group
-							controlId='formGender'
-							name='gender'
-							value={gender}
-							onChange={(e) => handleChange(e)}>
-							<Form.Control
-								as='select'
-								aria-label='select a political party'
-								onChange={(e) => handleChange(e)}>
-								<option>What gender are you?</option>
-								<option value='male'>male</option>
-								<option value='female'>female</option>
-								<option value='nonConforming'>non conforming</option>
-							</Form.Control>
-						</Form.Group>
-						<Form.Group
-							controlId='formPoliticalParty'
-							name='politicalParty'
-							value={politicalParty}
-							onChange={(e) => handleChange(e)}>
-							<Form.Control
-								as='select'
-								aria-label='select a political party'
-								onChange={(e) => handleChange(e)}>
-								<option>What Political Party do you most closely identify with?</option>
-								<option value='Republican'>Republican</option>
-								<option value='Democrat'>Democrat</option>
-								<option value='Libertarian'>Libertarian</option>
-								<option value='Independent'>Independent</option>
-							</Form.Control>
-						</Form.Group>
-						<Row>
+					<Row>
+						<Col>
+							<Form.Group controlId='formGender'>
+								<Form.Control
+									as='select'
+									aria-label='select your gender'
+									name='gender'
+									value={gender}
+									onChange={(e) => handleChange(e)}>
+									<option>What gender are you?</option>
+									<option value='male'>male</option>
+									<option value='female'>female</option>
+									<option value='non conforming'>non conforming</option>
+								</Form.Control>
+							</Form.Group>
+						</Col>
+						<Col>
+							<Form.Group controlId='formPoliticalParty'>
+								<Form.Control
+									as='select'
+									aria-label='select a political party'
+									name='politicalParty'
+									value={politicalParty}
+									onChange={(e) => handleChange(e)}>
+									<option>What Political Party do you most closely identify with?</option>
+									<option value='Republican'>Republican</option>
+									<option value='Democrat'>Democrat</option>
+									<option value='Libertarian'>Libertarian</option>
+									<option value='Independent'>Independent</option>
+								</Form.Control>
+							</Form.Group>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
 							<h3>social platforms</h3>
-						</Row>
-						<Row>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
 							<Button
 								onClick={() => setOpen(!open)}
 								variant='secondary'
 								aria-controls='social-inputs'
-								aria-expanded='open'
+								aria-expanded='true'
 								size='sm'>
 								optional
 							</Button>
-						</Row>
-						<Fade in={open}>
-							<div className='social-inputs'>
-								<Container>
-									<Row>
-										<Col>
-											<Form.Group controlId='formYoutube'>
-												<i className='fab fa-youtube fa-2x' />
-												<Form.Control
-													type='input'
-													placeholder='YouTube Username'
-													name='youtube'
-													value={youtube}
-													onChange={(e) => handleChange(e)}
-												/>
-											</Form.Group>
-										</Col>
-										<Col>
-											<Form.Group controlId='formTwitter'>
-												<i className='fab fa-twitter fa-2x' />
-												<Form.Control
-													type='input'
-													placeholder='Twitter Username'
-													name='twitter'
-													value={twitter}
-													onChange={(e) => handleChange(e)}
-												/>
-											</Form.Group>
-										</Col>
-										<Col>
-											<Form.Group controlId='formFacebook'>
-												<i className='fab fa-facebook fa-2x' />
-												<Form.Control
-													type='input'
-													placeholder='Facebook Username'
-													name='facebook'
-													value={facebook}
-													onChange={(e) => handleChange(e)}
-												/>
-											</Form.Group>
-										</Col>
-										<Col>
-											<Form.Group controlId='formInstagram'>
-												<i className='fab fa-instagram fa-2x' />
-												<Form.Control
-													type='input'
-													placeholder='Instagram Username'
-													name='instagram'
-													value={instagram}
-													onChange={(e) => handleChange(e)}
-												/>
-											</Form.Group>
-										</Col>
-									</Row>
-								</Container>
-							</div>
-						</Fade>
-						<Row>
+						</Col>
+					</Row>
+					<Fade in={open}>
+						<div className='social-inputs'>
+							<Container>
+								<Row>
+									<Col>
+										<Form.Group controlId='formYoutube'>
+											<i className='fab fa-youtube fa-2x' />
+											<Form.Control
+												type='input'
+												placeholder='YouTube Username'
+												name='youtube'
+												value={youtube}
+												onChange={(e) => handleChange(e)}
+											/>
+										</Form.Group>
+									</Col>
+									<Col>
+										<Form.Group controlId='formTwitter'>
+											<i className='fab fa-twitter fa-2x' />
+											<Form.Control
+												type='input'
+												placeholder='Twitter Username'
+												name='twitter'
+												value={twitter}
+												onChange={(e) => handleChange(e)}
+											/>
+										</Form.Group>
+									</Col>
+									<Col>
+										<Form.Group controlId='formFacebook'>
+											<i className='fab fa-facebook fa-2x' />
+											<Form.Control
+												type='input'
+												placeholder='Facebook Username'
+												name='facebook'
+												value={facebook}
+												onChange={(e) => handleChange(e)}
+											/>
+										</Form.Group>
+									</Col>
+									<Col>
+										<Form.Group controlId='formInstagram'>
+											<i className='fab fa-instagram fa-2x' />
+											<Form.Control
+												type='input'
+												placeholder='Instagram Username'
+												name='instagram'
+												value={instagram}
+												onChange={(e) => handleChange(e)}
+											/>
+										</Form.Group>
+									</Col>
+								</Row>
+							</Container>
+						</div>
+					</Fade>
+					<Row>
+						<Col>
 							<Button variant='primary' type='submit' size='sm'>
 								submit
 							</Button>
@@ -225,12 +241,12 @@ function EditProfile () {
 									go back
 								</Button>
 							</Link>
-						</Row>
-					</Form>
-				</Col>
-			</div>
-		);
-	}
+						</Col>
+					</Row>
+				</Form>
+			</Container>
+		</div>
+	);
 }
 
 export default EditProfile;

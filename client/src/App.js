@@ -1,6 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navigation from './components/layout/Navigation';
 import Landing from '../src/components/layout/Landing';
@@ -12,6 +11,7 @@ import CreateProfile from './components/layout/profile-forms/CreateProfile';
 import EditProfile from './components/layout/profile-forms/EditProfile';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Profiles from './components/layout/profiles/Profiles';
+import Profile from './components/Profile/Profile';
 
 //Redux Boiler Plate
 // need a provider which we will wrap everything with
@@ -37,17 +37,16 @@ const App = () => {
 				<BrowserRouter>
 					<Navigation />
 					<Route exact path='/' component={Landing} />
-					<Container>
-						<Alert />
-						<Switch>
-							<Route exact path='/register' component={Register} />
-							<Route exact path='/login' component={Login} />
-							<Route exact path='/profiles' component={Profiles} />
-							<PrivateRoute exact path='/create-profile' component={CreateProfile} />
-							<PrivateRoute exact path='/edit-profile' component={EditProfile} />
-							<PrivateRoute exact path='/dashboard' component={Dashboard} />
-						</Switch>
-					</Container>
+					<Alert />
+					<Switch>
+						<Route exact path='/register' component={Register} />
+						<Route exact path='/login' component={Login} />
+						<Route exact path='/profiles' component={Profiles} />
+						<Route exact path='/profile/:id' component={Profile} />
+						<PrivateRoute exact path='/create-profile' component={CreateProfile} />
+						<PrivateRoute exact path='/edit-profile' component={EditProfile} />
+						<PrivateRoute exact path='/dashboard' component={Dashboard} />
+					</Switch>
 				</BrowserRouter>
 			</div>
 		</Provider>

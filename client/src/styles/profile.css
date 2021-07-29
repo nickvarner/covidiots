@@ -12,3 +12,7 @@
 .edit-profile {
 	padding-top: 2rem;
 }
+
+.social-inputs input {
+	text-align: center;
+}
