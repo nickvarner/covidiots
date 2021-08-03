@@ -11,7 +11,8 @@ import CreateProfile from './components/layout/profile-forms/CreateProfile';
 import EditProfile from './components/layout/profile-forms/EditProfile';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Profiles from './components/layout/profiles/Profiles';
-import Profile from './components/Profile/Profile';
+import Profile from './components/layout/profile/Profile';
+import Submissions from './components/submissions/Submissions';
 
 //Redux Boiler Plate
 // need a provider which we will wrap everything with
@@ -43,6 +44,7 @@ const App = () => {
 						<Route exact path='/login' component={Login} />
 						<Route exact path='/profiles' component={Profiles} />
 						<Route exact path='/profile/:id' component={Profile} />
+						<Route exact path='/submissions' component={Submissions} />
 						<PrivateRoute exact path='/create-profile' component={CreateProfile} />
 						<PrivateRoute exact path='/edit-profile' component={EditProfile} />
 						<PrivateRoute exact path='/dashboard' component={Dashboard} />

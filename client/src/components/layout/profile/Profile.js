@@ -1,13 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileById } from '../../actions/profile';
-import Loading from '../layout/Loading';
+import { getProfileById } from '../../../actions/profile';
+import Loading from '../Loading';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout';
+import ProfileSubmissionList from './ProfileSubmissionList';
+
+import '../../../styles/profile.css';
 
 function Profile ({ match }) {
 	const dispatch = useDispatch();
@@ -27,14 +31,9 @@ function Profile ({ match }) {
 	return (
 		<Container>
 			<Row>
-				<Col>
-					<h1>profile</h1>
-				</Col>
-			</Row>
-			<Row>
-				<Col>
+				<Col className='py-2'>
 					<Link to='/profiles'>
-						<Button size='sm' variant='dark'>
+						<Button size='sm' variant='secondary' className='profile-button'>
 							go back
 						</Button>
 					</Link>
@@ -42,14 +41,22 @@ function Profile ({ match }) {
 					isLoading === false &&
 					auth.user._id === profile.user._id && (
 						<Link to='/edit-profile'>
-							<Button size='sm' variant='dark'>
+							<Button size='sm' variant='dark' className='profile-button'>
 								edit profile
 							</Button>
 						</Link>
 					)}
 				</Col>
 			</Row>
+			<Row>
+				<Col>
+					<h1>profile for:</h1>
+				</Col>
+			</Row>
 			<ProfileTop profile={profile} />
+			{profile.bio && <ProfileAbout profile={profile} />}
+			<h5>your submissions</h5>
+			<ProfileSubmissionList profile={profile} />
 		</Container>
 	);
 }

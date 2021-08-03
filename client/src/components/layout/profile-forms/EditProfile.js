@@ -134,7 +134,7 @@ function EditProfile () {
 									name='gender'
 									value={gender}
 									onChange={(e) => handleChange(e)}>
-									<option>What gender are you?</option>
+									<option value='not given'>What gender are you?</option>
 									<option value='male'>male</option>
 									<option value='female'>female</option>
 									<option value='non conforming'>non conforming</option>
@@ -149,7 +149,9 @@ function EditProfile () {
 									name='politicalParty'
 									value={politicalParty}
 									onChange={(e) => handleChange(e)}>
-									<option>What Political Party do you most closely identify with?</option>
+									<option value='not given'>
+										What Political Party do you most closely identify with?
+									</option>
 									<option value='Republican'>Republican</option>
 									<option value='Democrat'>Democrat</option>
 									<option value='Libertarian'>Libertarian</option>

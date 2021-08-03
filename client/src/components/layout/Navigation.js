@@ -29,15 +29,18 @@ const Navigation = () => {
 					<Nav className='mr-auto'>
 						<Container>
 							<NavDropdown title='submissions' id='basic-nav-dropdown'>
-								<Link to='/'>
-									<NavDropdown.Item href='#action/3.1'>add a submission</NavDropdown.Item>
-								</Link>
-								<Link to='/'>
-									<NavDropdown.Item href='#action/3.2'>my submissions</NavDropdown.Item>
-								</Link>
-								<Link to='/submissions'>
-									<NavDropdown.Item>go to all submissions</NavDropdown.Item>
-								</Link>
+								<NavDropdown.Item>
+									<Link to='/add-submission'>add a submission</Link>
+								</NavDropdown.Item>
+
+								<NavDropdown.Item>
+									<Link to='/'>my submissions</Link>
+								</NavDropdown.Item>
+
+								<NavDropdown.Item>
+									<Link to='/submissions'>go to all submissions</Link>
+								</NavDropdown.Item>
+
 								{isAuthenticated && (
 									<NavDropdown.Item onClick={() => dispatch(logout())}>logout</NavDropdown.Item>
 								)}
