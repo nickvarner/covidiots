@@ -22,9 +22,11 @@ const SubmissionItem = ({ submission }) => {
 				<Card.Title>{submission.title}</Card.Title>
 				<Card.Text>{submission.description && submission.description}</Card.Text>
 				<Card.Text>
-					<small className='text-muted'>
-						{submission.date && <Moment format='MM/DD/YYYY'>{submission.date}</Moment>}
-					</small>
+					{submission.date && (
+						<small className='text-muted'>
+							submitted on: <Moment format='MM/DD/YYYY'>{submission.date}</Moment>
+						</small>
+					)}
 				</Card.Text>
 				{/* <Card.Text>
 					<Button size='sm' variant='primary'>
@@ -45,7 +47,7 @@ const SubmissionItem = ({ submission }) => {
 					</Button>
 				</Link>
 				<Button size='sm' variant='primary' className='fas fa-thumbs-up' />
-				<small>{submission.votes && submission.votes.length}</small>
+				<small>{submission.likes && submission.likes.length}</small>
 				<Button size='sm' variant='danger' className='fas fa-thumbs-down' />
 				{!auth.loading &&
 				submission.user === auth.user._id && (
